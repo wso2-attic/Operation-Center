@@ -1,0 +1,23 @@
+
+<%
+var restartCommand = {"restart":null};
+include_once("util.jag");
+var log = new Log();
+
+var clusters = get_clusterManager();
+
+for(var i=0; i < clusters.length; i++){
+    restart(clusters[i].clusterManager);
+}
+
+function restart(clusterManager) {
+    if(clusterManager){
+        var url = clusterManager + "/restart";
+        post(url,restartCommand,headers);
+        print("send restart command to " + url);
+        log.info("send restart command to " + url);
+    } else{
+        log.info("undefined");
+    }
+}
+%>

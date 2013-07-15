@@ -1,0 +1,19 @@
+<%
+var log = new Log();
+include_once("util.jag");
+register();
+
+function register(){
+    var body = request.getContent();
+    body = parse(body);
+    log.info(body);
+    var clusterManagers = get_clusterManager();
+    if(!clusterManagers){
+        clusterManagers = new Array();
+        set_clusterManager(clusterManagers);
+    }
+    var cm = body.register.clusterManager;
+    print(cm + " registered");
+    clusterManagers.push(body);
+}
+%>
