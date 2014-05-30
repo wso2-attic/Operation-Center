@@ -1,7 +1,0 @@
-<%
-var log = new Log();
-print("Operations Center Console");
-
-%>
-
-
