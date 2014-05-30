@@ -1,0 +1,37 @@
+<%
+
+var log = new Log();
+
+function validateRequest(requestObj) {
+    if (requestObj != null) {
+        var isSecureMessage = requestObj.isSecure();
+        if (isSecureMessage == true) {
+            var operationsCenterOnly = requestObj.getHeader("operations-center-only");
+            if (operationsCenterOnly != null) {
+                return true;
+                // TODO - un-comment the below when the fix from Jaggery team available
+                // to access the attribute in the HttpServletRequest
+                /*
+                var certObj = requestObj.getAttribute("javax.servlet.request.X509Certificate");
+                if (certObj != null) {
+                    // TODO - do the validations
+                    return true;
+                } else {
+                    log.info("Certificate not found. Validation failed.");
+                }
+                */
+            } else {
+                log.info("Expected header operations-center-only not found. Validation failed.");
+            }
+        } else {
+            log.info("Request is not received via HTTPS. Validation failed.");
+        }
+    } else {
+        log.info("Request object is null. Validation failed.");
+    }
+
+    return false;
+}
+
+
+%>

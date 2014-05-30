@@ -15,7 +15,7 @@ if (node != null){
     options.action = 'urn:command';
     options.HTTPMethod = "GET";
 
-    options["HTTPHeaders"] = [ { name : "Authorization", value : "Basic YWRtaW46YWRtaW4="} ];
+    options["HTTPHeaders"] = [ { name : "operations-center-only", value : "OperationsCenter"} ];
 
     var ws_request = new ws.WSRequest();
     ws_request.open(options, node.adminServiceURL + "services/OperationsCenterAgentService/command", false);

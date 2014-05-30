@@ -1,10 +1,16 @@
 <%
 include("/util/uuid.jag");
 include("/util/node_cache_manager.jag");
+include("/util/request_validator.jag");
 
 var log = new Log();
 
 log.info("Registering...");
+
+if (!validateRequest(request)) {
+    response.addHeader("custom-header", "jaggery_response");
+    response.status = 500;
+} else {
 
 var messageBody = request.getContent();
 //log.info(messageBody);
@@ -64,6 +70,6 @@ if (messageName == "RegistrationRequest"){
     response.addHeader("custom-header", "jaggery_response");
     response.status = 500;
 }
-
+}
 
 %>
