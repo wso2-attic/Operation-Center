@@ -1,0 +1,133 @@
+<%
+
+include("/util/uuid.jag");
+
+var log = new Log();
+
+function getNodeCache() {
+    var nodeCache = application.get('nodeCache');
+    if (nodeCache == null){
+        log.info("Initializing node cache for the first time.");
+
+        nodeCache = new Array();
+        application.put('nodeCache', nodeCache);
+
+        initializeNodeCache();
+    }
+
+    return nodeCache;
+}
+
+function initializeNodeCache(){
+    var db = new Database("jdbc:mysql://localhost:3306/jag1", "root", "root");
+    var result = db.query("SELECT * FROM OC_NODE;");
+
+    for (var index = 0; index < result.length; index++) {
+        var record = result[index];
+        if (record != null) {
+            var cacheNode = getNode(record.OC_SERVER_URL);
+            if (cacheNode != null) {
+
+                var nodeId = generateUUID();
+                var ocToken = generateUUID();
+
+                var date = new Date();
+                var reportedTime = date.getTime();
+
+                var ip = record.OC_IP;
+                var adminServicePort = record.OC_MANAGEMENT_PORT;
+                var adminServiceURL = record.OC_SERVER_URL;
+                var ocaToken = 0;
+                var type = 0;
+                var serverName = record.OC_SEVER_NAME;
+                var domain = record.OC_DOMAIN;
+                var subDomain = record.OC_SUB_DOMAIN;
+                var mode = 0;
+
+                populateNode(cacheNode, nodeId, ocToken, ip, adminServicePort, adminServiceURL, ocaToken, type, serverName, domain, subDomain, mode, reportedTime);
+            }
+        }
+    }
+
+    db.close();
+}
+
+function getNode(adminServiceURL) {
+    var nodeCache = getNodeCache();
+
+    var node = null;
+    var nodeIndex = nodeCache.length;
+
+    for (var index = 0; index < nodeCache.length; index++){
+        var tempNode = nodeCache[index];
+        if (tempNode != null){
+            if (tempNode.adminServiceURL == adminServiceURL){
+                node = tempNode;
+                nodeIndex = index;
+                break;
+            }
+        }
+    }
+
+    if (node == null){
+        //log.info("Creating new node in Node Cache. [Token:" + ocaToken + "]" );
+
+        node = new Object();
+        nodeCache[nodeIndex] = node;
+    }
+
+    return node;
+}
+
+function getNodeFromNodeId(nodeId) {
+    var nodeCache = getNodeCache();
+
+    var node = null;
+
+    for (var index = 0; index < nodeCache.length; index++){
+        var tempNode = nodeCache[index];
+        if (tempNode != null){
+            if (tempNode.nodeId == nodeId){
+                node = tempNode;
+                break;
+            }
+        }
+    }
+
+    return node;
+}
+
+function getNodeFromOCToken(ocToken) {
+    var nodeCache = getNodeCache();
+
+    var node = null;
+
+    for (var index = 0; index < nodeCache.length; index++){
+        var tempNode = nodeCache[index];
+        if (tempNode != null){
+            if (tempNode.ocToken == ocToken){
+                node = tempNode;
+                break;
+            }
+        }
+    }
+
+    return node;
+}
+
+function populateNode(node, nodeId, ocToken, ip, adminServicePort, adminServiceURL, ocaToken, type, serverName, domain, subDomain, mode, reportedTime) {
+    node.nodeId = nodeId;
+    node.ip = ip;
+    node.ocToken = ocToken;
+    node.adminServicePort = adminServicePort;
+    node.adminServiceURL = adminServiceURL;
+    node.ocaToken = ocaToken;
+    node.type = type;
+    node.serverName = serverName;
+    node.domain = domain;
+    node.subDomain = subDomain;
+    node.mode = mode;
+    node.reportedTime = reportedTime;
+}
+
+%>

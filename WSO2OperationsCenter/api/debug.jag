@@ -1,0 +1,17 @@
+<%
+include("/util/node_cache_manager.jag");
+
+print("---debug---<br/>");
+
+
+print("<p>NodeCache</p>");
+var nodeCache = getNodeCache();
+for (var index = 0; index < nodeCache.length; index++){
+    var node = nodeCache[index];
+    if (node != null){
+        print(node);
+        print('<br/>');
+    }
+}
+
+%>
