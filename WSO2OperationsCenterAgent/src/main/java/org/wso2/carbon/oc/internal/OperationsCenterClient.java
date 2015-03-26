@@ -38,6 +38,7 @@ public class OperationsCenterClient {
         String responseMessage = "";
 
         PostMethod postMethod = new PostMethod(url);
+        postMethod.setRequestHeader("operations-center-only", "OperationsCenterAgent");
         //postMethod.setParameter();
         RequestEntity entity = null;
         try {

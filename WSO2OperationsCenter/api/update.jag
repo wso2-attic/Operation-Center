@@ -1,5 +1,6 @@
 <%
 include("/util/node_cache_manager.jag");
+include("/util/request_validator.jag");
 
 var log = new Log();
 
@@ -7,6 +8,11 @@ log.info("Updating...");
 
 var messageBody = request.getContent();
 //log.info(messageBody);
+
+if (!validateRequest(request)) {
+    response.addHeader("custom-header", "jaggery_response");
+    response.status = 500;
+} else {
 
 var jsonString = stringify(messageBody);
 var ocMessage = parse(jsonString);
@@ -50,5 +56,6 @@ if (messageName == "StatisticsUpdateMessage"){
 
     response.addHeader("custom-header", "jaggery_response");
     response.status = 500;
+}
 }
 %>
