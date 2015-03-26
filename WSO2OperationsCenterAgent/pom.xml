@@ -2,50 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.wos2.carbon</groupId>
-    <artifactId>org.wso2.carbon.operationscenter-agent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <groupId>org.wso2.carbon</groupId>
+    <artifactId>org.wso2.carbon.operationscenter.agent</artifactId>
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
+    <name>WSO2 Operations Center Agent</name>
+    <description>org.wso2.carbon.operationscenter.agent</description>
+    <url>http://wso2.org</url>
 
-    <dependencies>
-        <dependency>
-            <groupId>slf4j.wso2</groupId>
-            <artifactId>slf4j</artifactId>
-            <version>1.5.10.wso2v1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.carbon</groupId>
-            <artifactId>org.wso2.carbon.utils</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.carbon</groupId>
-            <artifactId>org.wso2.carbon.server.admin.common</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.carbon</groupId>
-            <artifactId>org.wso2.carbon.server.admin</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-asl</artifactId>
-            <version>1.9.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents.wso2</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.2.5.wso2v1</version>
-        </dependency>
-    </dependencies>
 
     <repositories>
         <repository>
@@ -59,6 +26,123 @@
             </releases>
         </repository>
     </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>slf4j.wso2</groupId>
+            <artifactId>slf4j</artifactId>
+            <version>1.5.10.wso2v1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.osgi</groupId>
+            <artifactId>org.eclipse.osgi.services</artifactId>
+            <version>3.3.100.v20120522-1822</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient.wso2</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1.0.wso2v2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang.wso2</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6.0.wso2v1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.utils</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.server.admin</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jezhumble.wso2</groupId>
+            <artifactId>javasysmon</artifactId>
+            <version>0.3.3.wso2v1</version>
+        </dependency>
+
+        <!-- mb dependencies -->
+        <dependency>
+            <groupId>org.wso2.andes.wso2</groupId>
+            <artifactId>andes-client</artifactId>
+            <version>0.13.wso2v8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.geronimo.specs.wso2</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
+            <version>1.1.0.wso2v1</version>
+        </dependency>
+
+        <!--stat count-->
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.statistics</artifactId>
+            <version>4.2.2</version>
+        </dependency>
+
+        <!--bam dependencies -->
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.databridge.commons.thrift</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.databridge.agent.thrift</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.authenticator.stub</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.databridge.commons</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.identity.authentication</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.logging</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.queuing</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-pool.wso2</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.5.0.wso2v1</version>
+        </dependency>
+        <dependency>
+            <groupId>libthrift.wso2</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.7.wso2v1</version>
+        </dependency>
+
+
+    </dependencies>
 
     <build>
         <plugins>
@@ -82,36 +166,55 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Vendor>WSO2OperationsCenterAgent</Bundle-Vendor>
+                        <Bundle-Vendor>WSO2 Inc</Bundle-Vendor>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Private-Package>
+                            org.wso2.carbon.oc.agent.internal.*,
+                            org.wso2.carbon.oc.agent.publisher.*,
+                            org.wso2.carbon.oc.agent.message.*,
+                            org.wso2.carbon.oc.agent.beans.*,
+                            org.wso2.carbon.oc.agent.model.*,
+                        </Private-Package>
+                        <Export-Package>
+                            !org.wso2.carbon.oc.agent.publisher.*,
+                            !org.wso2.carbon.oc.agent.internal.*,
+                            !org.wso2.carbon.oc.agent.message.*,
+                            !org.wso2.carbon.oc.agent.beans.*,
+                            !org.wso2.carbon.oc.agent.model.*,
+                            org.wso2.andes.jndi.*
+                        </Export-Package>
                         <Import-Package>
-                            javax.xml.namespace.*,
-                            javax.xml.datatype.*,
-                            javax.xml.parsers.*,
-                            javax.xml.stream.*,
-                            org.apache.axiom.om.*,
-                            org.apache.axis2.clustering.*,
-                            org.apache.axis2.context.*,
-                            org.apache.axis2.description.*,
-                            org.apache.axis2.engine.*,
-                            org.osgi.service.component.*,
                             org.slf4j.*,
+                            org.osgi.service.component.*,
+                            org.apache.commons.httpclient.*,
+                            org.apache.commons.lang.*,
+                            org.wso2.carbon.utils.*,
                             org.wso2.carbon.base.api.*,
+                            javax.xml.*,
+                            org.apache.axiom.om.*,
+                            org.apache.axis2.*,
                             org.wso2.carbon.server.admin.common.*,
                             org.wso2.carbon.server.admin.service.*,
-                            org.wso2.carbon.utils.*,
-                            org.apache.commons.httpclient.*,
-                            org.apache.commons.httpclient.methods,
-                            org.codehaus.jackson.*,
                             org.joda.time.*,
                             org.w3c.dom.*,
                             org.xml.sax.*,
-                            org.wso2.carbon.core.*
+                            com.jezhumble.javasysmon.*,
+                            javax.jms.*,
+                            javax.naming.*,
+                            org.wso2.carbon.*,
+                            com.google.common.util.concurrent.*,
+                            javax.net.ssl.*,
+                            javax.security.auth.callback.*,
+                            javax.security.sasl.*,
+                            javax.transaction.xa.*,
+                            org.apache.commons.logging.*,
+                            org.ietf.jgss.*,
                         </Import-Package>
-                        <Embed-Transitive>true</Embed-Transitive>
                         <Embed-Dependency>
+                            json-simple;scope=compile|runtime;inline=false,
+                            jackson-core-asl;scope=compile|runtime;inline=false,
                             jackson-mapper-asl;scope=compile|runtime;inline=false,
-                            jackson-core-asl;scope=compile|runtime;inline=false
+                            andes-client;scope=compile|runtime;inline=false,
                         </Embed-Dependency>
                     </instructions>
                 </configuration>
