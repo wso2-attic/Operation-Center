@@ -1,0 +1,54 @@
+<%
+include("/util/node_cache_manager.jag");
+
+var log = new Log();
+
+log.info("Updating...");
+
+var messageBody = request.getContent();
+//log.info(messageBody);
+
+var jsonString = stringify(messageBody);
+var ocMessage = parse(jsonString);
+
+//log.info(jsonObj);
+
+var messageName = ocMessage.ocMessageName;
+
+
+if (messageName == "StatisticsUpdateMessage"){
+    var ocToken = ocMessage.ocToken;
+    var status = ocMessage.status;
+
+    var node = getNodeFromOCToken(ocToken);
+    if (node != null){
+        var date = new Date();
+        var reportedTime = date.getTime();
+        node.reportedTime = reportedTime;
+        node.status = status;
+
+        response.addHeader("custom-header", "jaggery_response");
+        response.contentType = 'application/json';
+        response.content = '{"ocMessageName" : "StatisticsUpdateResponse"}';
+        response.status = 201;
+
+    }else{
+        log.info("Updates receiving from unregistered node");
+        log.debug("START==================================================");
+        log.debug(messageBody);
+        log.debug("END====================================================");
+
+        response.addHeader("custom-header", "jaggery_response");
+        response.status = 500;
+    }
+
+}else{
+    log.info("Unexpected message type received for update.");
+    log.debug("START==================================================");
+    log.debug(messageBody);
+    log.debug("END====================================================");
+
+    response.addHeader("custom-header", "jaggery_response");
+    response.status = 500;
+}
+%>
