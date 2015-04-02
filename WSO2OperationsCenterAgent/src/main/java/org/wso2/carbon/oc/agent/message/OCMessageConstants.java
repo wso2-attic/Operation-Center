@@ -45,7 +45,7 @@ public class OCMessageConstants {
     public static final String SERVER_TIMESTAMP = "timestamp";
     public static final String SERVER_PATCHES = "patches";
     public static final String SERVER_ID = "serverId";
-    public static final String CARBON_LOG = "carbonLog";
+    public static final String ARTIFACTS="artifacts";
 
     private OCMessageConstants() {
     }

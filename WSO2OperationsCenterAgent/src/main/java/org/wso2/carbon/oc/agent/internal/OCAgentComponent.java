@@ -19,9 +19,8 @@ package org.wso2.carbon.oc.agent.internal;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.service.component.ComponentContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.wso2.carbon.base.api.ServerConfigurationService;
+import org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider;
 import org.wso2.carbon.oc.agent.model.OCPublisherConfiguration;
 import org.wso2.carbon.oc.agent.publisher.OCDataPublisher;
 import org.wso2.carbon.server.admin.common.IServerAdmin;
@@ -52,15 +51,20 @@ import java.util.concurrent.TimeUnit;
  * unbind="unsetServerAdminService"
  * @scr.reference name="org.wso2.carbon.user.core.service"
  * interface="org.wso2.carbon.user.core.service.RealmService"
- * cardinality="1..1" policy="dynamic"
+ * cardinality="0..1" policy="dynamic"
  * bind="setRealmService"
  * unbind="unsetRealmService"
+ * @scr.reference name="org.wso2.carbon.oc.artifact.extractor"
+ * interface="org.wso2.carbon.oc.agent.artifact.extractor.OCArtifact"
+ * cardinality="0..n" policy="dynamic"
+ * bind="setArtifactService"
+ * unbind="unsetArtifactService"
  */
 
 public class OCAgentComponent {
 	private static final ScheduledExecutorService reporterTaskExecutor =
 			Executors.newScheduledThreadPool(1);
-    private static final Log logger = LogFactory.getLog(OCAgentComponent.class);
+	private static final Log logger = LogFactory.getLog(OCAgentComponent.class);
 
 	protected void activate(ComponentContext componentContext) {
 		try {
@@ -71,28 +75,27 @@ public class OCAgentComponent {
 
 			//active publisher config map
 			for (OCPublisherConfiguration ocPublisherConfiguration : ocPublisherConfigurationList) {
-                    OCDataPublisher ocDataPublisher = null;
+				OCDataPublisher ocDataPublisher = null;
 
-                    Class publisherClass = Class.forName(ocPublisherConfiguration.getClassPath());
+				Class publisherClass = Class.forName(ocPublisherConfiguration.getClassPath());
 
-                    ocDataPublisher = (OCDataPublisher) publisherClass.newInstance();
+				ocDataPublisher = (OCDataPublisher) publisherClass.newInstance();
 
-                    ocDataPublisher.init(ocPublisherConfiguration);
+				ocDataPublisher.init(ocPublisherConfiguration);
 
-                    OCAgentReporterTask ocAgentReporterTask
-                            = new OCAgentReporterTask(ocDataPublisher);
+				OCAgentReporterTask ocAgentReporterTask
+						= new OCAgentReporterTask(ocDataPublisher);
 
-                    reporterTaskExecutor.scheduleAtFixedRate(ocAgentReporterTask,
-                                                             0,
-                                                             ocDataPublisher.getInterval(),
-                                                             TimeUnit.MILLISECONDS);
+				reporterTaskExecutor.scheduleAtFixedRate(ocAgentReporterTask,
+				                                         0,
+				                                         ocDataPublisher.getInterval(),
+				                                         TimeUnit.MILLISECONDS);
 			}
 
 		} catch (Throwable throwable) {
 			logger.error("Failed to activate OperationsCenterAgentComponent", throwable);
 			reporterTaskExecutor.shutdown();
 		}
-
 
 	}
 
@@ -137,6 +140,16 @@ public class OCAgentComponent {
 
 	protected void unsetRealmService(RealmService realmService) {
 		OCAgentDataHolder.getInstance().setRealmService(null);
+	}
+
+	protected void setArtifactService(
+			OCArtifactProvider ocArtifactProvider) {
+		OCAgentDataHolder.getInstance().setOcArtifactProviders(ocArtifactProvider);
+	}
+
+	protected void unsetArtifactService(
+			OCArtifactProvider ocArtifactProvider) {
+		OCAgentDataHolder.getInstance().setOcArtifactProviders(null);
 	}
 
 }

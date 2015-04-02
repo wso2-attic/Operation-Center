@@ -181,7 +181,8 @@
                             !org.wso2.carbon.oc.agent.message.*,
                             !org.wso2.carbon.oc.agent.beans.*,
                             !org.wso2.carbon.oc.agent.model.*,
-                            org.wso2.andes.jndi.*
+                            org.wso2.andes.jndi.*,
+                            org.wso2.carbon.oc.agent.artifact.extractor.*,
                         </Export-Package>
                         <Import-Package>
                             org.slf4j.*,
@@ -209,6 +210,7 @@
                             javax.transaction.xa.*,
                             org.apache.commons.logging.*,
                             org.ietf.jgss.*,
+
                         </Import-Package>
                         <Embed-Dependency>
                             json-simple;scope=compile|runtime;inline=false,

@@ -18,8 +18,6 @@ package org.wso2.carbon.oc.agent.internal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.wso2.carbon.oc.agent.model.OCConfiguration;
 import org.wso2.carbon.oc.agent.model.OCPublishers;
 import org.wso2.carbon.server.admin.service.ServerAdmin;
@@ -41,22 +39,21 @@ public class OCAgentUtils {
 	private static final String FORCE_RESTART = "FORCE_RESTART";
 	private static final String GRACEFUL_SHUTDOWN = "GRACEFUL_SHUTDOWN";
 	private static final String GRACEFUL_RESTART = "GRACEFUL_RESTART";
-    private static final Log logger = LogFactory.getLog(OCAgentUtils.class);
+	private static final Log logger = LogFactory.getLog(OCAgentUtils.class);
 
 	private OCAgentUtils() {
 	}
 
 	/**
 	 * Extract all enabled publisher info
+	 *
 	 * @return Publishers - get all publisher objects
 	 */
-	//handle NPE
 	public static OCPublishers getOcPublishers() {
 		OCPublishers publishers = null;
 		try {
 			JAXBContext context = JAXBContext.newInstance(OCConfiguration.class);
 			Unmarshaller um = context.createUnmarshaller();
-			//TODO
 			OCConfiguration oc = (OCConfiguration) um.unmarshal(new FileReader(
 					CarbonUtils.getCarbonConfigDirPath() + File.separator +
 					OCAgentConstants.OC_XML));
@@ -88,7 +85,9 @@ public class OCAgentUtils {
 				} else if (GRACEFUL_SHUTDOWN.equals(command)) {
 					serverAdmin.shutdownGracefully();
 				} else {
-					logger.debug("Unknown command received. [" + command + "]");
+					if (logger.isDebugEnabled()) {
+						logger.debug("Unknown command received. [" + command + "]");
+					}
 				}
 			} catch (Exception e) {
 				logger.error("Failed while executing command. [" + command + "]", e);

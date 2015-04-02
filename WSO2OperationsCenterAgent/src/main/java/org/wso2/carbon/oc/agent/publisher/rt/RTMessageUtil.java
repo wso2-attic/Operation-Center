@@ -68,7 +68,7 @@ public class RTMessageUtil {
                 ocMessage.getIdleCpuUsage());
         syncDataMap.put(OCMessageConstants.SYSTEM_FREE_MEMORY,
                 ocMessage.getFreeMemory());
-
+         syncDataMap.put(OCMessageConstants.ARTIFACTS,ocMessage.getArtifacts());
         String message = null;
 
         try {

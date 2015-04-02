@@ -18,22 +18,25 @@ package org.wso2.carbon.oc.agent.internal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.wso2.carbon.base.api.ServerConfigurationService;
+import org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider;
 import org.wso2.carbon.server.admin.common.IServerAdmin;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.utils.ConfigurationContextService;
 
-public class OCAgentDataHolder {
-	private static OCAgentDataHolder instance = new OCAgentDataHolder();
-    private static final Log logger = LogFactory.getLog(OCAgentDataHolder.class);
+import java.util.ArrayList;
+import java.util.List;
 
+public class OCAgentDataHolder {
+	private static final Log logger = LogFactory.getLog(OCAgentDataHolder.class);
+	private static OCAgentDataHolder instance = new OCAgentDataHolder();
 	private ConfigurationContextService configurationContextService;
 	private ServerConfigurationService serverConfigurationService;
-	private IServerAdmin serverAdmin;           // server information, commands
-	private RealmService realmService;          // tenant information
+	private IServerAdmin serverAdmin;
+	private RealmService realmService;
 	private int serverId;
+	private List<OCArtifactProvider> ocArtifactProviders =
+			new ArrayList<OCArtifactProvider>();
 
 	private OCAgentDataHolder() {
 	    /* No initializations needed for the moment. */
@@ -77,11 +80,11 @@ public class OCAgentDataHolder {
 		this.realmService = realmService;
 	}
 
-	public int getServerId() {
-		return serverId;
+	public List<OCArtifactProvider> getOcArtifactProviders() {
+		return ocArtifactProviders;
 	}
 
-	public void setServerId(int serverId) {
-		this.serverId = serverId;
+	public void setOcArtifactProviders(OCArtifactProvider ocArtifactProvider) {
+		ocArtifactProviders.add(ocArtifactProvider);
 	}
 }

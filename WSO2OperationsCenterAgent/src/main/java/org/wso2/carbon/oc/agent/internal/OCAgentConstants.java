@@ -23,7 +23,6 @@ public class OCAgentConstants {
 
 	public static final String OC_XML = "operations-center.xml";
 
-
 	private OCAgentConstants() {
 	}
 }
