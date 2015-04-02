@@ -1,7 +1,7 @@
 package org.wso2.oc.internal;
 
 
-import org.wso2.oc.data.OCAgentMessage;
+import org.wso2.oc.beans.OCAgentMessage;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -11,10 +11,11 @@ import javax.ws.rs.core.Response;
 @Produces("application/json")
 public interface OCInternal {
     @POST
-    public Response registerServer(OCAgentMessage ocAgentMessage);
+    public Response registerServer(OCAgentMessage ocAgentMessage) throws Exception;
     @PUT
-    @Path("/{server_id}")
-    public Response synchronizeServer(@PathParam("server_id") String serverId,OCAgentMessage ocAgentMessage);
+    @Path("/{node_id}")
+    public Response synchronizeServer(@PathParam("node_id") String nodeId,OCAgentMessage ocAgentMessage)
+            throws Exception;
 
 }
 

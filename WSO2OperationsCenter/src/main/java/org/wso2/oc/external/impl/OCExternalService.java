@@ -2,7 +2,8 @@ package org.wso2.oc.external.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.wso2.oc.data.*;
+import org.wso2.oc.DataHolder;
+import org.wso2.oc.beans.*;
 import org.wso2.oc.external.OCExternal;
 
 import javax.ws.rs.WebApplicationException;
@@ -15,7 +16,7 @@ public class OCExternalService implements OCExternal {
 
 	public Map<String, Cluster> getAllClustersData() {
 
-		log.debug("Requesting all clusters data.");
+		log.debug("Requesting all clusters beans.");
 
 		Map<String,Cluster> clusters = DataHolder.getClusters();
 
@@ -28,7 +29,7 @@ public class OCExternalService implements OCExternal {
 
 	public Cluster getClusterData(String clusterId) {
 
-		log.debug("Requesting the data in cluster: "+clusterId);
+		log.debug("Requesting the beans in cluster: "+clusterId);
 
 		Map<String,Cluster> clusters = DataHolder.getClusters();
 
@@ -46,7 +47,7 @@ public class OCExternalService implements OCExternal {
 
 	public Map<String, Node> getAllClusterNodesData(String clusterId) {
 
-		log.debug("Requesting all nodes data in cluster: "+clusterId);
+		log.debug("Requesting all nodes beans in cluster: "+clusterId);
 
 		Map<String,Cluster> clusters = DataHolder.getClusters();
 
@@ -66,7 +67,7 @@ public class OCExternalService implements OCExternal {
 
 	public Node getClusterNodeData(String clusterId, String nodeId) {
 
-		log.debug("Requesting the data of the node: "+nodeId+" in the cluster: "+clusterId);
+		log.debug("Requesting the beans of the node: "+nodeId+" in the cluster: "+clusterId);
 
 		Map<String,Cluster> clusters = DataHolder.getClusters();
 
@@ -131,32 +132,4 @@ public class OCExternalService implements OCExternal {
 		return Response.ok().build();
 	}
 
-	public String requestLog(String clusterId, String nodeId) {
-
-		log.debug("Requesting log of the node: "+nodeId+" in the cluster: "+clusterId);
-
-		Map<String,Cluster> clusters = DataHolder.getClusters();
-
-		if(!clusters.containsKey(clusterId)){
-			throw new WebApplicationException(new Throwable("Cluster is not found"),
-			                                  Response.Status.BAD_REQUEST);
-		}
-
-		Map<String, Node> nodes = clusters.get(clusterId).getNodes();
-
-		if(!nodes.containsKey(nodeId)){
-			throw new WebApplicationException(new Throwable("Node is not found"),
-			                                  Response.Status.BAD_REQUEST);
-		}
-
-		Node node = nodes.get(nodeId);
-
-		if(node.isLogEnabled()){
-			return "";
-		}
-		else{
-			node.setLogEnabled(true);
-			return node.getCarbonLog();
-		}
-	}
 }

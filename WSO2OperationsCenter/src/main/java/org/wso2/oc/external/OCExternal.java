@@ -1,7 +1,7 @@
 package org.wso2.oc.external;
 
-import org.wso2.oc.data.Cluster;
-import org.wso2.oc.data.Node;
+import org.wso2.oc.beans.Cluster;
+import org.wso2.oc.beans.Node;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -42,8 +42,4 @@ public interface OCExternal {
 	                                   @PathParam("node-Id") String nodeId,
 	                                   @PathParam("command-Id") String commandId);
 
-	@GET
-	@Path("/{cluster-Id}/nodes/{node-Id}/log")
-	public String requestLog(@PathParam("cluster-Id") String clusterId,
-	                         @PathParam("node-Id") String nodeId);
 }
