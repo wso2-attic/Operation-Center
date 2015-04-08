@@ -314,7 +314,7 @@ public class OCAgentDataExtractor {
 		return patches;
 	}
 
-	public Map<String, List<OCArtifact>> getArtifact() {
+	public Map<String, List<OCArtifact>> getArtifacts() {
 		List<OCArtifactProvider> artifactProviders =
 				OCAgentDataHolder.getInstance().getOcArtifactProviders();
 		Map<String, List<OCArtifact>> artifacts =
@@ -353,7 +353,7 @@ public class OCAgentDataExtractor {
 			String timestamp =
 					new java.text.SimpleDateFormat("MM/dd/yyyy h:mm:ss a").format(new Date());
 			ocMessage.setTimestamp(timestamp);
-			ocMessage.setArtifacts(this.getArtifact());
+			ocMessage.setArtifacts(this.getArtifacts());
 		} catch (ParameterUnavailableException e) {
 			logger.error("Failed to read oc data parameters. ", e);
 		}
