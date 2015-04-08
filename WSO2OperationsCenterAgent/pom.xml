@@ -172,15 +172,15 @@
                             org.wso2.carbon.oc.agent.internal.*,
                             org.wso2.carbon.oc.agent.publisher.*,
                             org.wso2.carbon.oc.agent.message.*,
-                            org.wso2.carbon.oc.agent.beans.*,
+                            !org.wso2.carbon.oc.agent.beans.*,
                             org.wso2.carbon.oc.agent.model.*,
                         </Private-Package>
                         <Export-Package>
                             !org.wso2.carbon.oc.agent.publisher.*,
                             !org.wso2.carbon.oc.agent.internal.*,
                             !org.wso2.carbon.oc.agent.message.*,
-                            !org.wso2.carbon.oc.agent.beans.*,
                             !org.wso2.carbon.oc.agent.model.*,
+                            org.wso2.carbon.oc.agent.beans.*,
                             org.wso2.andes.jndi.*,
                             org.wso2.carbon.oc.agent.artifact.extractor.*,
                         </Export-Package>

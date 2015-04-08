@@ -24,6 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.base.api.ServerConfigurationService;
 import org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider;
+import org.wso2.carbon.oc.agent.beans.OCArtifact;
 import org.wso2.carbon.oc.agent.internal.exceptions.ParameterUnavailableException;
 import org.wso2.carbon.oc.agent.message.OCMessage;
 import org.wso2.carbon.server.admin.common.ServerUpTime;
@@ -313,11 +314,11 @@ public class OCAgentDataExtractor {
 		return patches;
 	}
 
-	public Map<String, List<OCArtifactProvider>> getArtifact() {
+	public Map<String, List<OCArtifact>> getArtifact() {
 		List<OCArtifactProvider> artifactProviders =
 				OCAgentDataHolder.getInstance().getOcArtifactProviders();
-		Map<String, List<OCArtifactProvider>> artifacts =
-				new HashMap<String, List<OCArtifactProvider>>();
+		Map<String, List<OCArtifact>> artifacts =
+				new HashMap<String, List<OCArtifact>>();
 		for (OCArtifactProvider ocArtifactProvider : artifactProviders) {
 			artifacts.put(ocArtifactProvider.getArtifactType(), ocArtifactProvider.getArtifacts());
 		}
