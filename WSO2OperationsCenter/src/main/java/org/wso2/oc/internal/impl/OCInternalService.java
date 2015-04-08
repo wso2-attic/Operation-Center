@@ -1,4 +1,21 @@
+/*
+ * Copyright 2004,2005 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.wso2.oc.internal.impl;
+
 import org.wso2.oc.DataHolder;
 import org.wso2.oc.ServerConstants;
 import org.wso2.oc.beans.*;
@@ -11,6 +28,7 @@ import java.util.*;
 public class OCInternalService implements OCInternal {
 	/**
 	 * register cluster and set node level data and add it to the cluster
+	 *
 	 * @param ocAgentMessage
 	 * @return generated node-id
 	 * @throws Exception
@@ -25,6 +43,7 @@ public class OCInternalService implements OCInternal {
 
 	/**
 	 * updates the node with the new parameters of the synchronization message
+	 *
 	 * @param nodeId
 	 * @param ocAgentMessage
 	 * @return list of commands available on the node
@@ -38,6 +57,7 @@ public class OCInternalService implements OCInternal {
 
 	/**
 	 * initialize the cluster with the data coming from registration message
+	 *
 	 * @param ocAgentMessage
 	 * @return cluster
 	 */
@@ -56,6 +76,7 @@ public class OCInternalService implements OCInternal {
 
 	/**
 	 * initialize the node with parameters of the registration method
+	 *
 	 * @param ocAgentMessage
 	 * @return node
 	 * @throws Exception
@@ -79,6 +100,7 @@ public class OCInternalService implements OCInternal {
 
 	/**
 	 * generate nodeId from the parameters from registration messages
+	 *
 	 * @param ocAgentMessage
 	 * @return
 	 * @throws Exception
@@ -87,7 +109,8 @@ public class OCInternalService implements OCInternal {
 		String nodeId = "";
 		if (ocAgentMessage.getAdminServiceUrl() == null || ocAgentMessage.getServerName() == null ||
 		    ocAgentMessage.getServerVersion() == null) {
-			throw new WebApplicationException("Could not create NodeId",Response.Status.BAD_REQUEST);
+			throw new WebApplicationException("Could not create NodeId",
+			                                  Response.Status.BAD_REQUEST);
 		} else {
 			String[] temp = ocAgentMessage.getAdminServiceUrl().split("//");
 			String[] tempUrl = temp[1].split("/");
@@ -104,12 +127,14 @@ public class OCInternalService implements OCInternal {
 
 	/**
 	 * update the details of the cluster with synchronization message
+	 *
 	 * @param nodeId
 	 * @param ocAgentMessage
 	 * @return
 	 * @throws Exception
 	 */
-	private List<String> updateCluster(String nodeId, OCAgentMessage ocAgentMessage) throws Exception {
+	private List<String> updateCluster(String nodeId, OCAgentMessage ocAgentMessage)
+			throws Exception {
 		Cluster cluster = DataHolder.getClusters().get(ocAgentMessage.getDomain());
 		Node node = cluster.getNodes().get(nodeId);
 		Node temp = updateNode(node, ocAgentMessage);
@@ -129,11 +154,12 @@ public class OCInternalService implements OCInternal {
 
 	/**
 	 * update the node related info with the synchronization message
+	 *
 	 * @param node
 	 * @param ocAgentMessage
 	 * @return updated node
 	 * @throws Exception if the server sends registration message without sending synchronization
-	 * message
+	 *                   message
 	 */
 	private Node updateNode(Node node, OCAgentMessage ocAgentMessage) throws Exception {
 		if (!node.isRegistrationReceived()) {
@@ -158,6 +184,7 @@ public class OCInternalService implements OCInternal {
 	/**
 	 * checks if there are any cluster commands available and executes those in
 	 * round robin fashion
+	 *
 	 * @param nodeId
 	 * @param cluster
 	 */
@@ -180,7 +207,7 @@ public class OCInternalService implements OCInternal {
 				            clusterCommand.getPreviousNode() == null)) {
 
 					setCommandOnNodes(cluster, clusterCommand, nodeId);
-                //checks whether the previously executed node is up again
+					//checks whether the previously executed node is up again
 				} else if (clusterCommand.getPreviousNode().getNodeId()
 				                         .equals(nodeId)) {
 
@@ -203,6 +230,7 @@ public class OCInternalService implements OCInternal {
 
 	/**
 	 * initialize the node list to be executed for cluster wide operations
+	 *
 	 * @param cluster
 	 * @param clusterCommand
 	 */
@@ -229,6 +257,7 @@ public class OCInternalService implements OCInternal {
 	/**
 	 * sets the commands for nodes in round-robin
 	 * fashion and updates the node list and set the next node to execute command
+	 *
 	 * @param cluster
 	 * @param clusterCommand
 	 * @param nodeId
@@ -259,8 +288,8 @@ public class OCInternalService implements OCInternal {
 				clusterCommand.setPreviousNodeUp(false);
 			}
 			clusterCommand.setNextNode(cluster.getNodes().get(nextNodeId));
-         /*if the command is executed on all the nodes clear the command list and remove the
-           executed command from cluster command list
+		 /*if the command is executed on all the nodes clear the command list and remove the
+		   executed command from cluster command list
 		   */
 		} else if (temp.isEmpty()) {
 			clusterCommand.getExecutedNodes().clear();
