@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.oc.agent.internal;
+package org.wso2.carbon.oc.agent.artifact.extractor;
 
-/**
- * Holds constants related to oc agent
- */
-public class OCAgentConstants {
+import org.wso2.carbon.oc.agent.beans.OCArtifact;
 
-	public static final String OC_XML = "operations-center.xml";
+import java.util.List;
 
-	private OCAgentConstants() {
-	}
+public interface OCArtifactProvider {
+	/**
+	 * get artifact details from the bundles
+	 * @return
+	 */
+	public List<OCArtifact> getArtifacts();
+	/**
+	 * get the type of deployed artifact
+	 * @return
+	 */
+	public String getArtifactType();
 }

@@ -16,7 +16,8 @@
 
 package org.wso2.carbon.oc.agent.message;
 
-
+import org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider;
+import org.wso2.carbon.oc.agent.beans.OCArtifact;
 import org.wso2.carbon.oc.agent.beans.Tenant;
 
 import java.util.List;
@@ -48,8 +49,7 @@ public class OCMessage {
 	private List<Tenant> tenants;
 	private List<String> patches;
 	private String timestamp;
-
-	private Map<String, String> dataMap;
+	private Map<String, List<OCArtifact>> artifacts;
 
 	public String getLocalIp() {
 		return localIp;
@@ -217,5 +217,13 @@ public class OCMessage {
 
 	public void setUserCpuUsage(double userCpuUsage) {
 		this.userCpuUsage = userCpuUsage;
+	}
+
+	public Map<String, List<OCArtifact>> getArtifacts() {
+		return artifacts;
+	}
+
+	public void setArtifacts(Map<String, List<OCArtifact>> artifacts) {
+		this.artifacts = artifacts;
 	}
 }

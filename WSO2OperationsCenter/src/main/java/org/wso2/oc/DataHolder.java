@@ -14,15 +14,29 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.oc.agent.internal;
+package org.wso2.oc;
 
-/**
- * Holds constants related to oc agent
- */
-public class OCAgentConstants {
+import org.wso2.oc.beans.Cluster;
+import org.wso2.oc.beans.Node;
 
-	public static final String OC_XML = "operations-center.xml";
+import java.util.HashMap;
+import java.util.Map;
 
-	private OCAgentConstants() {
+public class DataHolder {
+	private static Map<String, Cluster> clusters = new HashMap<String, Cluster>();
+
+	private DataHolder() {
+	}
+
+	public static Map<String, Cluster> getClusters() {
+		return clusters;
+	}
+
+	public static void addCluster(Cluster cluster) {
+		clusters.put(cluster.getClusterId(), cluster);
+	}
+
+	public static void addNode(String clusterId, Node node) {
+		clusters.get(clusterId).addNewNode(node.getNodeId(), node);
 	}
 }

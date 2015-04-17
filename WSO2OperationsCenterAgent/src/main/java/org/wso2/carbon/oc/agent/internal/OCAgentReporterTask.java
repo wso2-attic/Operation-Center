@@ -18,8 +18,6 @@ package org.wso2.carbon.oc.agent.internal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.wso2.carbon.oc.agent.publisher.OCDataPublisher;
 
 /**
@@ -27,7 +25,7 @@ import org.wso2.carbon.oc.agent.publisher.OCDataPublisher;
  */
 
 public class OCAgentReporterTask implements Runnable {
-    private static final Log logger = LogFactory.getLog(OCAgentReporterTask.class);
+	private static final Log logger = LogFactory.getLog(OCAgentReporterTask.class);
 
 	private OCDataPublisher ocDataPublisher;
 

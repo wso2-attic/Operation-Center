@@ -22,9 +22,9 @@ import org.apache.axis2.clustering.ClusteringAgent;
 import org.apache.axis2.description.Parameter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.wso2.carbon.base.api.ServerConfigurationService;
+import org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider;
+import org.wso2.carbon.oc.agent.beans.OCArtifact;
 import org.wso2.carbon.oc.agent.internal.exceptions.ParameterUnavailableException;
 import org.wso2.carbon.oc.agent.message.OCMessage;
 import org.wso2.carbon.server.admin.common.ServerUpTime;
@@ -59,9 +59,9 @@ public class OCAgentDataExtractor {
 	private static final String PATCH_PATH =
 			CarbonUtils.getCarbonHome() + "/repository/components/patches";
 	private static final String PATCH = "patch";
+	private static final Log logger = LogFactory.getLog(OCAgentDataExtractor.class);
 	private static OCAgentDataExtractor instance =
 			new OCAgentDataExtractor();
-    private static final Log logger = LogFactory.getLog(OCAgentDataExtractor.class);
 	private static OCMessage ocMessage;
 	private JavaSysMon javaSysMon = new JavaSysMon();
 	private String os;
@@ -74,11 +74,11 @@ public class OCAgentDataExtractor {
 		cpuCount = 0;
 		cpuSpeed = 0;
 		totalMemory = 0;
-//		cpuCount = javaSysMon.numCpus();
+		//		cpuCount = javaSysMon.numCpus();
 
-//		cpuSpeed = javaSysMon.cpuFrequencyInHz() / GIGA;
+		//		cpuSpeed = javaSysMon.cpuFrequencyInHz() / GIGA;
 
-//		totalMemory = javaSysMon.physical().getTotalBytes() / MEGA;
+		//		totalMemory = javaSysMon.physical().getTotalBytes() / MEGA;
 	}
 
 	public static OCAgentDataExtractor getInstance() {
@@ -273,12 +273,14 @@ public class OCAgentDataExtractor {
 
 	public List<org.wso2.carbon.oc.agent.beans.Tenant> getTenants() {
 		Tenant[] tenants = null;
-		List<org.wso2.carbon.oc.agent.beans.Tenant> tenantBeanList = new ArrayList<org.wso2.carbon.oc.agent.beans.Tenant>();
+		List<org.wso2.carbon.oc.agent.beans.Tenant> tenantBeanList =
+				new ArrayList<org.wso2.carbon.oc.agent.beans.Tenant>();
 		try {
 			tenants = OCAgentDataHolder.getInstance().getRealmService().getTenantManager()
 			                           .getAllTenants();
-			for(Tenant t : tenants) {
-				org.wso2.carbon.oc.agent.beans.Tenant tenantBean = new org.wso2.carbon.oc.agent.beans.Tenant();
+			for (Tenant t : tenants) {
+				org.wso2.carbon.oc.agent.beans.Tenant tenantBean =
+						new org.wso2.carbon.oc.agent.beans.Tenant();
 				tenantBean.setId(t.getId());
 				tenantBean.setAdminFirstName(t.getAdminFirstName());
 				tenantBean.setAdminLastName(t.getAdminLastName());
@@ -312,11 +314,21 @@ public class OCAgentDataExtractor {
 		return patches;
 	}
 
+	public Map<String, List<OCArtifact>> getArtifacts() {
+		List<OCArtifactProvider> artifactProviders =
+				OCAgentDataHolder.getInstance().getOcArtifactProviders();
+		Map<String, List<OCArtifact>> artifacts =
+				new HashMap<String, List<OCArtifact>>();
+		for (OCArtifactProvider ocArtifactProvider : artifactProviders) {
+			artifacts.put(ocArtifactProvider.getArtifactType(), ocArtifactProvider.getArtifacts());
+		}
+		return artifacts;
+	}
+
 	public OCMessage getOcMessage() {
 		if (ocMessage == null) {
 			ocMessage = new OCMessage();
 		}
-
 		try {
 			ocMessage.setLocalIp(this.getLocalIp());
 			ocMessage.setServerName(this.getServerName());
@@ -337,17 +349,16 @@ public class OCAgentDataExtractor {
 			ocMessage.setSystemLoadAverage(this.getSystemLoadAverage());
 			ocMessage.setTenants(this.getTenants());
 			ocMessage.setPatches(this.getPatches());
-
 			ocMessage.setServerUpTime(this.getServerUpTime());
-
 			String timestamp =
 					new java.text.SimpleDateFormat("MM/dd/yyyy h:mm:ss a").format(new Date());
 			ocMessage.setTimestamp(timestamp);
-
+			ocMessage.setArtifacts(this.getArtifacts());
 		} catch (ParameterUnavailableException e) {
 			logger.error("Failed to read oc data parameters. ", e);
 		}
 
 		return ocMessage;
 	}
+
 }

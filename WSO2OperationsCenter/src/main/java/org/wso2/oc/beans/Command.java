@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.oc.agent.internal;
+package org.wso2.oc.beans;
 
-/**
- * Holds constants related to oc agent
- */
-public class OCAgentConstants {
+public class Command {
+	private String commandName;
 
-	public static final String OC_XML = "operations-center.xml";
+	public Command(String commandName) {
+		this.commandName = commandName;
+	}
 
-	private OCAgentConstants() {
+	public String getCommandName() {
+		return commandName;
+	}
+
+	public void setCommandName(String commandName) {
+		this.commandName = commandName;
 	}
 }

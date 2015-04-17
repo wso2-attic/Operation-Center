@@ -32,13 +32,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.wso2.carbon.oc.agent.internal.OCAgentUtils;
 import org.wso2.carbon.oc.agent.message.OCMessage;
-import org.wso2.carbon.oc.agent.message.OCMessageConstants;
 import org.wso2.carbon.oc.agent.model.OCPublisherConfiguration;
 import org.wso2.carbon.oc.agent.publisher.OCDataPublisher;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,7 +84,10 @@ public class RTPublisher implements OCDataPublisher {
     }
 
     public void publish(OCMessage ocMessage) {
-        logger.debug("======real-time===========reporting");
+        if (logger.isDebugEnabled()) {
+            logger.debug("======real-time===========reporting");
+        }
+
 
         if (!isRegistered) {
             register(ocMessage);
@@ -114,22 +115,14 @@ public class RTPublisher implements OCDataPublisher {
             isRegistered = false;
         }
 
+        logger.info(responseBody);
         //response check
         if (responseBody != null && responseBody.length() > 0) {
-            Map<String, String> regResMap;
-            try {
 
-                regResMap = objectMapper
-                        .readValue(responseBody, new TypeReference<HashMap<String, String>>() {
-                        });
-                if (regResMap != null) {
-                    serverId = regResMap.get(OCMessageConstants.SERVER_ID);
-                }
-
-
+            if (responseBody != null) {
+                serverId = responseBody;
                 isRegistered = true;
-            } catch (IOException e) {
-                logger.error("Failed to read values from RegistrationResponse", e);
+            } else {
                 isRegistered = false;
             }
         }
@@ -172,7 +165,9 @@ public class RTPublisher implements OCDataPublisher {
             if (synResMap != null) {
                 for (String command : synResMap) {
                     OCAgentUtils.performAction(command);
-                    logger.debug("Executing command. [Command:" + command + "]");
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Executing command. [Command:" + command + "]");
+                    }
                 }
 
             } else {
@@ -205,7 +200,9 @@ public class RTPublisher implements OCDataPublisher {
                 }
                 return responseBody;
             } else {
-                logger.debug("Request failed with status Code : " + statusCode);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Request failed with status Code : " + statusCode);
+                }
             }
         } catch (UnsupportedEncodingException e) {
             logger.error("Failed to register with Operations Center", e);
@@ -244,7 +241,9 @@ public class RTPublisher implements OCDataPublisher {
             }
 
         } catch (UnsupportedEncodingException e) {
-            logger.error("Failed to sync data with Operations Center", e);
+            if (logger.isDebugEnabled()) {
+                logger.error("Failed to sync data with Operations Center", e);
+            }
         } finally {
             putMethod.releaseConnection();
         }

@@ -110,7 +110,9 @@ public class MBPublisher implements OCDataPublisher {
 
     @Override
     public void publish(OCMessage ocMessage) {
-        logger.debug("======wso2-mb===========reporting");
+        if(logger.isDebugEnabled()) {
+            logger.debug("======wso2-mb===========reporting");
+        }
         if (!isRegistered) {
             sendMessages(REG_QUEUE, MBMessageUtil.getRegistrationPayload(ocMessage));
             isRegistered = true;
