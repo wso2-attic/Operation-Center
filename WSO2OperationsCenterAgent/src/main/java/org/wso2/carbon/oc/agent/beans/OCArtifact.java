@@ -24,6 +24,14 @@ public class OCArtifact {
 	private String version;
 	private Map<String, Object> properties = new HashMap<String, Object>();
 
+	public OCArtifact() {
+	       version = "1.0.0";
+	}
+	public OCArtifact(long lastModifiedTime, String version) {
+	       this.lastModifiedTime = lastModifiedTime;
+	       this.version = version;
+	}
+
 	public long getLastModifiedTime() {
 		return lastModifiedTime;
 	}
@@ -44,7 +52,8 @@ public class OCArtifact {
 		return properties;
 	}
 
-	public void setProperties(Map<String, Object> properties) {
-		this.properties = properties;
+	public void setProperty(String key, String value) {
+	    properties.put(key, value);
 	}
+
 }

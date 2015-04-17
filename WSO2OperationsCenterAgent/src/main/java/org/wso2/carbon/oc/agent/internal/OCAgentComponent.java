@@ -55,7 +55,7 @@ import java.util.concurrent.TimeUnit;
  * bind="setRealmService"
  * unbind="unsetRealmService"
  * @scr.reference name="org.wso2.carbon.oc.artifact.extractor"
- * interface="org.wso2.carbon.oc.agent.artifact.extractor.OCArtifact"
+ * interface="org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider"
  * cardinality="0..n" policy="dynamic"
  * bind="setArtifactService"
  * unbind="unsetArtifactService"
