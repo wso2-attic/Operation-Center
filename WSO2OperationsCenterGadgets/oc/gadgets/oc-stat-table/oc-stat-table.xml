@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="OC Statistics" />
+    <UserPref name="dataSource" display_name="Data Source" default_value="/oc/api/stat/servers"/>
+    <UserPref name="interval" display_name="Update Intervals (s)" default_value="No" />
+    
+
+    <Content type="html">
+     <![CDATA[
+     
+      <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+      <link rel="stylesheet" type="text/css" href="plugins/jquery_ui/jquery-ui.min.css">       
+
+      
+      <script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+      <script language="javascript" type="text/javascript" src="plugins/jquery_ui/jquery-ui.min.js"></script>
+      
+      <script src="js/jquery.dataTables.min.js"></script>
+
+       
+       
+       <!-- create this table according to common data structure-->
+
+       <div id="dialog"></div>
+
+
+        <table>
+            <thead>
+              <tr>
+                <th>Cluster</th>
+                <th>IP</th>
+                <th>Sub Domain</th>
+                <th>AdminURL</th>
+                <th>UpTime</th>
+                <th>TotalRAM</th>
+                <th>FreeRAM</th>
+                <th>Threads</th>
+                <th>Status</th>
+                <th>Patches</th>
+              </tr>
+            </thead>
+            
+        <tbody id="table-stat-body"></tbody>
+       
+       <script type="text/javascript" src="js/app.js"></script>
+
+
+      ]]>
+    </Content>
+</Module>

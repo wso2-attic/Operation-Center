@@ -1,0 +1,43 @@
+.icon-restart, .icon-shutdown, .icon-dropdown {
+			    cursor: pointer;
+			    fill: #fff;
+}
+
+.login {
+    fill: #000;
+    cursor: pointer;
+    stroke: blue;
+}
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.title text {
+    font: 10px sans-serif;
+}
+
+.title-2 {
+    font-size: 10px;			    
+    text-anchor: middle;
+}
+
+.title-3 {
+    font-size: 10px;
+    fill: #fff;
+    text-anchor: middle;
+}
+
+.class_1 {
+    fill: #000;
+}
+
+.link {
+    fill: none;
+    stroke-width: 1.5px;
+}
+
+body {
+    overflow: hidden;
+}

@@ -1,0 +1,51 @@
+<%
+var log = new Log();
+// var api_path = "http://192.168.57.22:9783/OCServer/services/oc-server/external/oc/clusters/";
+var api_path = "http://localhost:9764/OCServer/services/oc-server/external/oc/clusters/";
+
+var clusterId = request.getParameter("cid");
+var nodeId = request.getParameter("nid");
+var command = request.getParameter("command");
+var xhr = new XMLHttpRequest();
+var url = "";
+var isCommand = false;
+
+//cluster command
+if (command != 'null' && clusterId != 'null' && nodeId == 'null') {
+	url = api_path + clusterId + "/commands/" + command;
+	isCommand = true;
+}
+
+//node command
+else if (command != 'null' && clusterId != 'null' && nodeId != 'null') {
+	url = api_path + clusterId + "/nodes/" + nodeId + "/commands/" + command;
+	isCommand = true;
+}
+
+//all info
+else if (command == 'null' && clusterId == 'null' && nodeId == 'null') {
+	url = api_path;
+}
+
+
+
+if (url) {
+	// log.info(url)
+	if(isCommand){
+		xhr.open("PUT", url);
+		log.info("executing coommand : " + url);
+	}else{
+		xhr.open("GET", url);
+	}
+	
+	xhr.send();
+	try {
+		var x = xhr.responseText;
+		if (x) print(x);
+	} catch (e) {
+		print("error...")
+	}
+
+} 
+
+%>

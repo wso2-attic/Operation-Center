@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="OC Topology">
+     <Require feature="pubsub-2">
+          <Param name="topics">
+                <![CDATA[
+         <Topic title="oc-logger name="my-channel" publish="true"/>
+         ]]>
+            </Param>
+        </Require>
+    </ModulePrefs>
+    <UserPref name="dataSource" display_name="Data Source" default_value="/oc/api/stat/servers"/>
+    <UserPref name="interval" display_name="Update Intervals (s)" default_value="No" />
+    
+
+    <Content type="html">
+     <![CDATA[
+     
+      <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+      
+      <link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css">
+
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+      <div id="body"></div>
+      <div id="dialog-confirm"></div>   
+
+      <!-- js -->
+      <script type="text/javascript" src="js/jquery-213-min.js"></script>
+      
+      <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+      
+      <script type="text/javascript" src="js/d3.min.js"></script>
+      
+      <script type="text/javascript" src="js/helper.js"></script>
+      
+      <script type="text/javascript" src="js/topology.js"></script>
+      
+      <script type="text/javascript" src="js/app.js"></script>
+
+      <script type="text/javascript" src="js/publisher.js"></script>
+
+      
+
+
+      ]]>
+    </Content>
+</Module>
