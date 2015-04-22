@@ -1,0 +1,84 @@
+<OperationsCenter>
+    <Publishers>
+  <!-- 
+      Real Time Publisher 
+    -->
+      <Publisher>
+        <Name>RTPublisher</Name>
+        <Class>org.wso2.carbon.oc.agent.publisher.rt.RTPublisher</Class>
+        <Properties>
+            <Property name="reportURL">http://localhost:9764/OCServer/services/oc-server/internal/oc</Property>
+            <Property name="username">admin</Property>
+            <Property name="password">admin</Property>
+            <Property name="interval">5000</Property>
+        </Properties>
+      </Publisher>
+
+    <!-- 
+      Message Broker Publisher 
+    -->
+      <!-- <Publisher>
+        <Name>MBPublisher</Name>
+        <Class>org.wso2.carbon.oc.publisher.MBPublisher</Class>
+        <Properties>
+            <Property name="reportHostName">localhost</Property>
+            <Property name="reportHttpPort">5673</Property>
+            <Property name="username">admin</Property>
+            <Property name="password">admin</Property>
+            <Property name="interval">5000</Property>
+    </Properties>
+      </Publisher> -->
+
+
+    <!-- 
+      Business Analysis Monitor Publisher 
+    -->
+      <!-- <Publisher>
+        <Name>BAMPublisher</Name>
+        <Class>org.wso2.carbon.oc.agent.publisher.bam.BAMPublisher</Class>
+        <Properties>
+            <Property name="reportHostName">localhost</Property>
+            <Property name="thriftPort">7611</Property>
+            <Property name="thriftSSLPort">7711</Property>
+            <Property name="username">admin</Property>
+            <Property name="password">admin</Property>
+            <Property name="interval">5000</Property>
+    	</Properties>
+      </Publisher> -->
+
+
+	<!-- 
+      Complex Event Processor Publisher 
+    -->
+		<!-- <Publisher>
+	        <Name>CEPPublisher</Name>
+	        <Class>org.wso2.carbon.oc.agent.publisher.cep.CEPPublisher</Class>
+	        <Properties>
+	            <Property name="reportHostName">localhost</Property>
+	            <Property name="thriftPort">7611</Property>
+	            <Property name="thriftSSLPort">7711</Property>
+	            <Property name="username">admin</Property>
+	            <Property name="password">admin</Property>
+	            <Property name="interval">5000</Property>
+	    	</Properties>
+	      </Publisher>
+ -->
+      
+    </Publishers>
+
+    <Subscribers>
+    	<!-- 
+			ActiveMQ Topic Subscriber
+    	 -->
+    	<Subscriber>
+    		<Name>ApacheActiveMQ</Name>
+    		<Class>org.wso2.carbon.oc.agent.subscriber.activemq.ActiveMQTopicSubscriber</Class>
+    		<Properties>
+    			<Property name="java.naming.factory.initial">org.apache.activemq.jndi.ActiveMQInitialContextFactory</Property>
+    		</Properties>
+    	</Subscriber>
+
+    	
+    </Subscribers>
+
+</OperationsCenter>
