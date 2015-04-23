@@ -5,18 +5,9 @@ $(function() {
 	// var dataFile = prefs.getString("dataSource");
 	// var interval = parseFloat(prefs.getString("interval"));
 	//console.log("app.js loaded!")
-	// var api = "https://localhost:9443/oc/api/stat/server";
 
 
-	/*
-	index.jag
-	<%
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "https://10.100.4.133:9443/test/");
-	xhr.setRequestHeader("user" , "madhuka");
-	xhr.send(); 
-	print(xhr.responseText);
-	%>*/
+	
 	var api = "https://localhost:9443/oc/gadgets/oc-topology/api.jag";
 
 function getProductNameShort(longName) {
@@ -96,7 +87,8 @@ function getMoreInfo(node, cluster) {
 		version: cluster.clusterVersion,
 		patches: n.patches,
 		url: n.adminServiceUrl,
-		children: [getPatches(n), getTenants(cluster)]
+		node_type: "normal",
+		children: [getPatches(n), getTenants(cluster), getArtifacts(n)]
 		// children: [getPatches(n), getTenant(n)]
 	}
 	return [moreInfo];
@@ -105,6 +97,7 @@ function getMoreInfo(node, cluster) {
 function getPatches(n) {
 	var data = {
 		name: n.patches.length+" Patches",
+		node_type: "normal",
 		children: getChildPatches(n)
 	}
 	
@@ -115,7 +108,8 @@ function getChildPatches(n) {
 	var patches = [];
 	for(var i = 0; i < n.patches.length; i++) {
 		var data = {
-			name: n.patches[i]
+			name: n.patches[i],
+			node_type: "normal"
 		}
 		patches.push(data);
 	}
@@ -126,6 +120,7 @@ function getChildPatches(n) {
 function getTenants(c) {
 	var data = {
 		name: c.tenants.length+" Tenants",
+		node_type: "normal",
 		children: getChildTenants(c.tenants)
 	}
 	return data;
@@ -141,6 +136,8 @@ function getChildTenants(tenants) {
 			domain: t.domain,
 			active: t.active,
 			email: t.email,
+			node_type: "normal",
+			node_size: "small",
 			createdDate: t.createdDate
 		}
 
@@ -148,6 +145,48 @@ function getChildTenants(tenants) {
 	});
 	
 	return tenantsArray;
+}
+
+function getArtifacts(c) {
+	var data = {
+		name: "Artifacts",
+		node_type: "normal",
+		node_size: "small",
+		children: getChildArtifacts(c.artifacts)
+	}
+	return data;
+}
+
+function getChildArtifacts(artifacts) {
+	var childArtifacts = [];
+	//web apps
+	var data = {
+		name: (artifacts.webapp.length - 1) + " Web Apps",
+		node_type: "normal",
+		node_size: "small",
+		children: getWebappArtifacets(artifacts.webapp)
+	}
+	// console.log(getWebappArtifacets(artifacts.webapp));
+	childArtifacts.push(data);
+	return childArtifacts;
+}
+
+function getWebappArtifacets(webapps) {
+	var webappArtifacts = [];
+	webapps.map(function(webapp) {
+		if(webapp.properties.displayName == null){
+		return;
+		}
+		var data = {
+			name: webapp.properties.displayName,
+			id_: 0,
+			node_type: "normal",
+			node_size: "small",
+			version: webapp.version,
+		}
+		webappArtifacts.push(data)
+	});
+	return webappArtifacts;
 }
 
 var data;

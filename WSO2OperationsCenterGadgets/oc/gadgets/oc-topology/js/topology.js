@@ -31,6 +31,7 @@ var moreInfoText = " Info";
 var patchesText = "Patches";
 var patchText = "patch";
 var tenantsText = "Tenants";
+var artifactsText = "Artifacts";
 var endText = ".";
 
 
@@ -151,8 +152,8 @@ function update(source) {
         .attr("x", rectW/2)
         .attr("y", rectH/2)
         .attr("dx", "-5.5em")
-        .text(function(d) {
-        return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, clusterText)  || isTrue(d, patchText) ? "" : "Up Time";
+        .text(function(d) { //return isTrue(d, rootText) || d.node_type == "normal"
+        return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, clusterText)  || isTrue(d, patchText) || d.node_type == "normal" ? "" : "Up Time";
     });
     
     //uptime text value
@@ -257,36 +258,6 @@ function update(source) {
     });
 
 
-
-    /*.append("tspan")
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? "Version":"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 95)
-    //----------
-    .append("tspan")
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? "Free Memory":"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 30)
-    //----------
-    .append("tspan")
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? "Thread Count":"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 30)
-    //----------
-    .append("tspan")
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? "Load Average":"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 30)
-    //------------------
-    .append("tspan")
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? "Patches":"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 30);*/
     
     //cpu text
     nodeEnter.append("text")
@@ -295,7 +266,7 @@ function update(source) {
         .attr("y", rectH / 2)
         .attr("dx", "-1.5em")
         .text(function(d) {
-        return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, clusterText)  || isTrue(d, patchText)  ? "" : "%CPU";
+        return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, clusterText)  || isTrue(d, patchText) || d.node_type == "normal" ? "" : "%CPU";
     });
     
     //cpu text value
@@ -446,42 +417,7 @@ function update(source) {
         return isTrue(d, moreInfoText) ? "view log": "";
     }).on("click",  viewLog);         
 
-    /*    
-    .append("tspan")
-    .attr("id", function(d) {return d.id_+"-version"})
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? d.version:"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 130)
-    //----------
-    .append("tspan")
-    .attr("id", function(d) {return d.id_+"-memory"})
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? d.freeMemory:"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 130)
-    //----------
-    .append("tspan")
-    .attr("id", function(d) {return d.id_+"-thread"})
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? d.threadCount:"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 130)
-    //----------
-    .append("tspan")
-    .attr("id", function(d) {return d.id_+"-load"})
-    .attr("class", "class_1")
-    .text(function(d) {return isTrue(d, moreInfoText) ? d.loadAverage:"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 130)
-    //-------------
-    .append("tspan")
-    .attr("id", function(d) {return d.id_+"-patch"})
-    .attr("class", "class_1")
-    .text(function(d) {
-    	return isTrue(d, moreInfoText) ? "patch1, patch2":"";})
-    .attr("dy", i ? "1.2em" : 0)
-    .attr("x", 130); */
+    
     
     //add restart icon
     nodeEnter.append("rect")
@@ -492,9 +428,9 @@ function update(source) {
         .attr("rx", 5)
         .attr("ry", 5)
         .attr("transform", "translate("+(rectW-iconW-padding/2)+", "+(rectH-iconH-padding/2)+")")
-        .attr("stroke", function(d) {return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, patchText)  ? "none" : "#fff";})
+        .attr("stroke", function(d) {return isTrue(d, rootText) || d.node_type == "normal" ? "none" : "#fff";})
         .attr("stroke-width", 1.2)
-    .style("fill", function(d) {return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText)  || isTrue(d, patchText) ? "none": "url(#lblackG)" })
+    .style("fill", function(d) {return isTrue(d, rootText) || d.node_type == "normal" ? "none": "url(#lblackG)" })
         .on("click", restart); ;
     
     //add shutdown icon
@@ -506,9 +442,9 @@ function update(source) {
         .attr("rx", 5)
         .attr("ry", 5)
         .attr("transform", "translate("+(rectW-iconW*2-padding)+", "+(rectH-iconH-padding/2)+")")
-    .attr("stroke", function(d) {return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, patchText) ? "none" : "#fff";})
+    .attr("stroke", function(d) {return isTrue(d, rootText) || d.node_type == "normal" ? "none" : "#fff";})
         .attr("stroke-width", 1.2)
-    .style("fill", function(d) {return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText)  || isTrue(d, patchText) ? "none": "url(#lblackG)" })
+    .style("fill", function(d) {return isTrue(d, rootText) || d.node_type == "normal" ? "none": "url(#lblackG)" })
         .on("click", shutdown); ;
     
      
@@ -526,7 +462,7 @@ function update(source) {
     .attr("class", "icon-restart")
     .attr('font-family', 'FontAwesome')
     .attr('font-size', function(d) { return 1+'em'} )
-    .text(function(d) { return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, patchText)  ? '' : "\uf01e" })
+    .text(function(d) { return isTrue(d, rootText) || d.node_type == "normal"  ? '' : "\uf01e" })
     .attr("transform", "translate("+(rectW-iconW+padding*0.2)+", "+(rectH-iconH/2+padding*0.1)+")")
     .on("click", restart); ; 
     
@@ -536,7 +472,7 @@ function update(source) {
     .attr("class", "icon-shutdown")
     .attr('font-family', 'FontAwesome')
     .attr('font-size', function(d) { return 1+'em'} )
-    .text(function(d) { return isTrue(d, rootText) || isTrue(d, moreInfoText) || isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, endText) || isTrue(d, patchText)  ? '' : "\uf011"})
+    .text(function(d) { return isTrue(d, rootText) || d.node_type == "normal" ? '' : "\uf011"})
     .attr("transform", "translate("+(rectW-iconW*2-padding*0.2)+", "+(rectH-iconH/2+padding*0.1)+")")
     .on("click", shutdown);
     
@@ -595,7 +531,7 @@ function update(source) {
             else if(isTrue(d, endText)) {
                 h = rectH * 1.5;
             }
-            else if(isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, patchText)) {
+            else if(isTrue(d, patchesText) || isTrue(d, tenantsText) || isTrue(d, patchText) || d.node_size == "small") {
                 h = rectH/2;
             }
             else{

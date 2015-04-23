@@ -1,6 +1,6 @@
 <%
 	var log = new Log();
-	var api_path = "http://192.168.57.22:9783/OCServer/services/oc-server/external/oc/clusters/";
+	var api_path = "http://localhost:9764/OCServer/services/oc-server/external/oc/clusters/";
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", api_path);
