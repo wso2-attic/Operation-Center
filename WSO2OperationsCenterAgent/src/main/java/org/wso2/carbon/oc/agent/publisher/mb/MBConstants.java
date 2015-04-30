@@ -1,7 +1,7 @@
 package org.wso2.carbon.oc.agent.publisher.mb;
 
 /**
- * Holds message broker related constants
+ * Holds constants broker related constants
  */
 public class MBConstants {
 

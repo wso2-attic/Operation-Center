@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.oc.agent.message;
+package org.wso2.carbon.oc.agent.beans;
 
 import org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider;
 import org.wso2.carbon.oc.agent.beans.OCArtifact;

@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.databridge.agent.thrift.DataPublisher;
 import org.wso2.carbon.databridge.agent.thrift.exception.AgentException;
 import org.wso2.carbon.databridge.commons.exception.*;
-import org.wso2.carbon.oc.agent.message.OCMessage;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
 import org.wso2.carbon.oc.agent.model.OCPublisherConfiguration;
 import org.wso2.carbon.oc.agent.publisher.OCDataPublisher;
 import org.wso2.carbon.utils.CarbonUtils;

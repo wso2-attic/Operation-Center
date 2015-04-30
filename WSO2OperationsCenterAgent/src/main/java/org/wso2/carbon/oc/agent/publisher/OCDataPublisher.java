@@ -16,7 +16,7 @@
 
 package org.wso2.carbon.oc.agent.publisher;
 
-import org.wso2.carbon.oc.agent.message.OCMessage;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
 import org.wso2.carbon.oc.agent.model.OCPublisherConfiguration;
 
 /**

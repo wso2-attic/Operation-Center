@@ -26,7 +26,7 @@ import org.wso2.carbon.base.api.ServerConfigurationService;
 import org.wso2.carbon.oc.agent.artifact.extractor.OCArtifactProvider;
 import org.wso2.carbon.oc.agent.beans.OCArtifact;
 import org.wso2.carbon.oc.agent.internal.exceptions.ParameterUnavailableException;
-import org.wso2.carbon.oc.agent.message.OCMessage;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
 import org.wso2.carbon.server.admin.common.ServerUpTime;
 import org.wso2.carbon.server.admin.service.ServerAdmin;
 import org.wso2.carbon.user.api.Tenant;

@@ -27,6 +27,20 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>repo.eclipse.org</id>
+            <name>Paho Repository - Releases</name>
+            <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>repo.eclipse.org</id>
+            <name>Paho Repository - Snapshots</name>
+            <url>https://repo.eclipse.org/content/repositories/paho-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
     <dependencies>
         <dependency>
             <groupId>slf4j.wso2</groupId>
@@ -141,7 +155,102 @@
             <version>0.7.wso2v1</version>
         </dependency>
 
+        <!--stratos messaging cutom-->
+        <!--<dependency>-->
+            <!--<groupId>com.wso2.ocagent.messaging</groupId>-->
+            <!--<artifactId>ocagent-messaging</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
 
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.paho</groupId>-->
+            <!--<artifactId>mqtt-client</artifactId>-->
+            <!--<version>0.4.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.google.code.gson</groupId>-->
+            <!--<artifactId>gson</artifactId>-->
+            <!--<version>2.3.1</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.activemq</groupId>-->
+            <!--<artifactId>activemq-core</artifactId>-->
+            <!--<version>5.3.2</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jms_1.1_spec</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.logging</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.utils</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jamesmurty.utils</groupId>
+            <artifactId>java-xmlbuilder</artifactId>
+            <version>0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>mqtt-client</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>5.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.logging</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.utils</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>mqtt-client</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <version>5.3.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -171,52 +280,30 @@
                         <Private-Package>
                             org.wso2.carbon.oc.agent.internal.*,
                             org.wso2.carbon.oc.agent.publisher.*,
-                            org.wso2.carbon.oc.agent.message.*,
+                            org.wso2.carbon.oc.agent.constants.*,
                             !org.wso2.carbon.oc.agent.beans.*,
                             org.wso2.carbon.oc.agent.model.*,
+                            org.wso2.carbon.oc.agent.messaging.*,
                         </Private-Package>
                         <Export-Package>
                             !org.wso2.carbon.oc.agent.publisher.*,
                             !org.wso2.carbon.oc.agent.internal.*,
-                            !org.wso2.carbon.oc.agent.message.*,
+                            !org.wso2.carbon.oc.agent.constants.*,
                             !org.wso2.carbon.oc.agent.model.*,
                             org.wso2.carbon.oc.agent.beans.*,
                             org.wso2.andes.jndi.*,
                             org.wso2.carbon.oc.agent.artifact.extractor.*,
                         </Export-Package>
                         <Import-Package>
-                            org.slf4j.*,
-                            org.osgi.service.component.*,
-                            org.apache.commons.httpclient.*,
-                            org.apache.commons.lang.*,
-                            org.wso2.carbon.utils.*,
-                            org.wso2.carbon.base.api.*,
-                            javax.xml.*,
-                            org.apache.axiom.om.*,
-                            org.apache.axis2.*,
-                            org.wso2.carbon.server.admin.common.*,
-                            org.wso2.carbon.server.admin.service.*,
-                            org.joda.time.*,
-                            org.w3c.dom.*,
-                            org.xml.sax.*,
-                            com.jezhumble.javasysmon.*,
-                            javax.jms.*,
-                            javax.naming.*,
-                            org.wso2.carbon.*,
-                            com.google.common.util.concurrent.*,
-                            javax.net.ssl.*,
-                            javax.security.auth.callback.*,
-                            javax.security.sasl.*,
-                            javax.transaction.xa.*,
-                            org.apache.commons.logging.*,
-                            org.ietf.jgss.*,
-
+                            *;resolution:=optional
                         </Import-Package>
                         <Embed-Dependency>
                             json-simple;scope=compile|runtime;inline=false,
                             jackson-core-asl;scope=compile|runtime;inline=false,
                             jackson-mapper-asl;scope=compile|runtime;inline=false,
                             andes-client;scope=compile|runtime;inline=false,
+                            gson;scope=compile|runtime;inline=false,
+                            activemq-core;scope=compile|runtime;inline=false,
                         </Embed-Dependency>
                     </instructions>
                 </configuration>

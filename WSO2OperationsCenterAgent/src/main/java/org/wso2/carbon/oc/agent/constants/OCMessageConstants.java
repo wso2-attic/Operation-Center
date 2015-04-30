@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.oc.agent.message;
+package org.wso2.carbon.oc.agent.constants;
 
 /**
- * This holds oc message key values
+ * This holds oc constants key values
  */
 public class OCMessageConstants {
 

@@ -19,15 +19,15 @@ package org.wso2.carbon.oc.agent.publisher.rt;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.wso2.carbon.oc.agent.message.OCMessage;
-import org.wso2.carbon.oc.agent.message.OCMessageConstants;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
+import org.wso2.carbon.oc.agent.constants.OCMessageConstants;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Real time message utility.
+ * Real time constants utility.
  */
 public class RTMessageUtil {
     private static final Log logger = LogFactory.getLog(RTMessageUtil.class);
@@ -37,7 +37,7 @@ public class RTMessageUtil {
     }
 
     /**
-     * This method builds dynamic message
+     * This method builds dynamic constants
      *
      * @param ocMessage OCMessage  - all server data keys can found @ OCAgentConstants
      * @return String - json string
@@ -82,7 +82,7 @@ public class RTMessageUtil {
     }
 
     /**
-     * This method builds static message for registration
+     * This method builds static constants for registration
      *
      * @param ocMessage OCMessage  - all server data keys can found @ OCAgentConstants
      * @return String - json string

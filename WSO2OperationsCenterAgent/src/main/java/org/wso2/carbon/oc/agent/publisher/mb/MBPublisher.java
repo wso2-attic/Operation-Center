@@ -18,7 +18,7 @@ package org.wso2.carbon.oc.agent.publisher.mb;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.wso2.carbon.oc.agent.message.OCMessage;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
 import org.wso2.carbon.oc.agent.model.OCPublisherConfiguration;
 import org.wso2.carbon.oc.agent.publisher.OCDataPublisher;
 
@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Allows publish data to message broker endpoint
+ * Allows publish data to constants broker endpoint
  */
 public class MBPublisher implements OCDataPublisher {
 
@@ -74,7 +74,7 @@ public class MBPublisher implements OCDataPublisher {
 
     /**
      * @param queueName   - String mb queue name
-     * @param jsonMessage - String mb queue message json string
+     * @param jsonMessage - String mb queue constants json string
      */
     public void sendMessages(String queueName, String jsonMessage) {
 
@@ -90,9 +90,9 @@ public class MBPublisher implements OCDataPublisher {
             queueConnection.start();
             QueueSession queueSession =
                     queueConnection.createQueueSession(false, QueueSession.AUTO_ACKNOWLEDGE);
-            // send message
+            // send constants
             Queue queue = (Queue) ctx.lookup(queueName);
-            // create the message to send
+            // create the constants to send
 
             TextMessage textMessage = queueSession.createTextMessage(jsonMessage);
             QueueSender queueSender = queueSession.createSender(queue);

@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.wso2.carbon.oc.agent.internal.OCAgentUtils;
-import org.wso2.carbon.oc.agent.message.OCMessage;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
 import org.wso2.carbon.oc.agent.model.OCPublisherConfiguration;
 import org.wso2.carbon.oc.agent.publisher.OCDataPublisher;
 
@@ -97,7 +97,7 @@ public class RTPublisher implements OCDataPublisher {
     }
 
     /**
-     * send the real time registration message
+     * send the real time registration constants
      *
      * @param ocMessage - all oc data
      */
@@ -129,7 +129,7 @@ public class RTPublisher implements OCDataPublisher {
     }
 
     /**
-     * send the real time synchronization message
+     * send the real time synchronization constants
      *
      * @param ocMessage - all oc data
      */
@@ -178,7 +178,7 @@ public class RTPublisher implements OCDataPublisher {
 
     /**
      * @param url      String - operations center url
-     * @param request  String - json string request message
+     * @param request  String - json string request constants
      * @param expected int - expected http status code
      * @return String - response json string
      * @throws IOException - sever connect problem
@@ -214,7 +214,7 @@ public class RTPublisher implements OCDataPublisher {
 
     /**
      * @param url      String - operations center url
-     * @param request  String - json string request message
+     * @param request  String - json string request constants
      * @param expected int - expected http status code
      * @return String - response json string
      * @throws IOException - sever connect problem

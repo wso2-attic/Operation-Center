@@ -19,20 +19,20 @@ package org.wso2.carbon.oc.agent.publisher.bam;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.wso2.carbon.oc.agent.message.OCMessage;
-import org.wso2.carbon.oc.agent.message.OCMessageConstants;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
+import org.wso2.carbon.oc.agent.constants.OCMessageConstants;
 
 import java.io.IOException;
 import java.util.*;
 
 /**
- * BAM message utility
+ * BAM constants utility
  */
 public class BAMMessageUtil {
     private static final Log logger = LogFactory.getLog(BAMMessageUtil.class);
     private static ObjectMapper objectMapper = new ObjectMapper();  // for json conversion
-    private static String bamRegisterPayloadDef;// BAM registration message payload definition
-    private static String bamSyncPayloadDef;// BAM synchronization message payload definition
+    private static String bamRegisterPayloadDef;// BAM registration constants payload definition
+    private static String bamSyncPayloadDef;// BAM synchronization constants payload definition
 
     //stream names
     private static final String REGISTER_STREAM = "RegisterStream";
@@ -43,7 +43,7 @@ public class BAMMessageUtil {
     }
 
     /**
-     * @return String - register message stream definition json
+     * @return String - register constants stream definition json
      */
     static String getRegisterStreamDef(OCMessage ocMessage) {
         return "{" +
@@ -61,7 +61,7 @@ public class BAMMessageUtil {
     }
 
     /**
-     * @return String - synchronize message stream definition json
+     * @return String - synchronize constants stream definition json
      */
     static String getSynchronizeStreamDef(OCMessage ocMessage) {
         return "{" +
@@ -79,7 +79,7 @@ public class BAMMessageUtil {
     }
 
     /**
-     * This builds the final BAM registration json message
+     * This builds the final BAM registration json constants
      *
      * @param dataMap - all oc data map
      * @return object array of individual values
@@ -114,7 +114,7 @@ public class BAMMessageUtil {
 
 
     /**
-     * This builds the final BAM synchronize json message
+     * This builds the final BAM synchronize json constants
      *
      * @param dataMap - all oc data map
      * @return object array of individual values
@@ -181,7 +181,7 @@ public class BAMMessageUtil {
     }
 
     /**
-     * This builds the registration message from all oc data map
+     * This builds the registration constants from all oc data map
      *
      * @param ocMessage - all oc data map
      * @return Map<String, Object> - filtered static oc data map
@@ -218,7 +218,7 @@ public class BAMMessageUtil {
     }
 
     /**
-     * This builds the synchronize message from all oc data map
+     * This builds the synchronize constants from all oc data map
      *
      * @param ocMessage - all oc data map
      * @return Map<String, Object> - filtered dynamic oc data map

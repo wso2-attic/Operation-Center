@@ -19,8 +19,8 @@ package org.wso2.carbon.oc.agent.publisher.mb;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.wso2.carbon.oc.agent.message.OCMessage;
-import org.wso2.carbon.oc.agent.message.OCMessageConstants;
+import org.wso2.carbon.oc.agent.beans.OCMessage;
+import org.wso2.carbon.oc.agent.constants.OCMessageConstants;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,7 +37,7 @@ public class MBMessageUtil {
     }
 
     /**
-     * This method builds static event payload message
+     * This method builds static event payload constants
      *
      * @param ocMessage OCMessage - all server data
      * @return String - json string
@@ -90,7 +90,7 @@ public class MBMessageUtil {
     }
 
     /**
-     * This method builds dynamic event payload message
+     * This method builds dynamic event payload constants
      *
      * @param ocMessage OCMessage - all server data
      * @return String - json string

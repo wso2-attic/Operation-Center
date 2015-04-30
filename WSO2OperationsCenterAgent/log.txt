@@ -1,0 +1,58 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] Using the builder org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder with a thread count of 1
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building WSO2 Operations Center Agent 1.0.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ org.wso2.carbon.operationscenter.agent ---
+[INFO] Deleting /home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ org.wso2.carbon.operationscenter.agent ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:compile (default-compile) @ org.wso2.carbon.operationscenter.agent ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 28 source files to /home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/target/classes
+[INFO] Some input files use unchecked or unsafe operations.
+[INFO] Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-scr-plugin:1.7.2:scr (generate-scr-scrdescriptor) @ org.wso2.carbon.operationscenter.agent ---
+[WARNING] Source tree does not exist. Ignoring /home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/target/generated-sources/annotations
+[WARNING] Class org.wso2.carbon.oc.agent.internal.OCAgentComponent is using deprecated javadoc tags  at file:/home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/src/main/java/org/wso2/carbon/oc/agent/internal/OCAgentComponent.java:36
+[WARNING] It is highly recommended to fix these problems, as future versions might not support these features anymore.
+[INFO] Generating 2 MetaType Descriptors to /home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/target/scr-plugin-generated/OSGI-INF/metatype/metatype.xml
+[INFO] Writing abstract service descriptor /home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/target/scr-plugin-generated/OSGI-INF/scr-plugin/scrinfo.xml with 1 entries.
+[INFO] Generating 1 Service Component Descriptors to /home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/target/scr-plugin-generated/OSGI-INF/serviceComponents.xml
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:testResources (default-testResources) @ org.wso2.carbon.operationscenter.agent ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/noelyahan/Desktop/Dev/ocproject/OC-Git/new_archi/Operation-Center/WSO2OperationsCenterAgent/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:testCompile (default-testCompile) @ org.wso2.carbon.operationscenter.agent ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.18.1:test (default-test) @ org.wso2.carbon.operationscenter.agent ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- maven-bundle-plugin:2.3.5:bundle (default-bundle) @ org.wso2.carbon.operationscenter.agent ---
+[WARNING] Embed-Dependency: clause "json-simple;scope=compile|runtime;inline=false" did not match any dependencies
+[ERROR] Bundle org.wso2.carbon:org.wso2.carbon.operationscenter.agent:bundle:1.0.0-SNAPSHOT : Unresolved references to [com.google.gson, org.apache.activemq.command, org.apache.activemq.util, org.apache.commons.collections, org.apache.commons.lang3, org.eclipse.paho.client.mqttv3, org.eclipse.paho.client.mqttv3.persist] by class(es) on the Bundle-Classpath[Jar:dot, Jar:jackson-core-asl-1.9.13.jar, Jar:jackson-mapper-asl-1.9.13.jar, Jar:andes-client-0.13.wso2v8.jar, Jar:org.apache.stratos.messaging-4.1.0-SNAPSHOT.jar]: [org/apache/stratos/messaging/message/filter/topology/TopologyServiceFilter.class, org/apache/stratos/messaging/message/filter/MessageFilter.class, org/apache/stratos/messaging/broker/publish/EventPublisher.class, org/apache/stratos/messaging/broker/connect/mqtt/MqttTopicSubscriber.class, org/apache/stratos/messaging/broker/connect/mqtt/MqttTopicSubscriber$MQTTSubscriberCallback.class, org/apache/stratos/messaging/message/filter/topology/TopologyClusterFilter.class, org/apache/stratos/messaging/broker/connect/mqtt/MqttTopicConnector.class, org/apache/stratos/messaging/message/JsonMessage.class, org/apache/stratos/messaging/broker/connect/mqtt/MqttTopicPublisher.class, org/apache/stratos/messaging/util/MessagingUtil.class, org/apache/stratos/messaging/broker/subscribe/EventSubscriber.class, org/apache/stratos/messaging/message/filter/topology/TopologyMemberFilter.class, org/apache/stratos/messaging/broker/connect/amqp/AmqpTopicSubscriber$1.class, org/apache/stratos/messaging/domain/application/Application.class]
+[ERROR] Error(s) found in bundle configuration
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.628 s
+[INFO] Finished at: 2015-04-24T14:22:51+05:30
+[INFO] Final Memory: 37M/386M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.felix:maven-bundle-plugin:2.3.5:bundle (default-bundle) on project org.wso2.carbon.operationscenter.agent: Error(s) found in bundle configuration -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
