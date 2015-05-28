@@ -26,8 +26,8 @@ public class NodeEventPublisher {
 	public static void publishEvent(Event event) {
 		//publishing events to application status topic
 		String topic = MessagingUtil.getMessageTopicName(event);
-		log.info("TOPIC: ");
-		log.info(topic);
+//		log.info("Event published: ");
+//		log.info(topic);
 		EventPublisher eventPublisher = EventPublisherPool.getPublisher(topic);
 		eventPublisher.publish(event);
 	}

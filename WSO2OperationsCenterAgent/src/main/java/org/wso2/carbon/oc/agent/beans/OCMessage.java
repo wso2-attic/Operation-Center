@@ -49,6 +49,7 @@ public class OCMessage {
 	private List<Tenant> tenants;
 	private List<String> patches;
 	private String timestamp;
+	private String command;
 	private Map<String, List<OCArtifact>> artifacts;
 
 	public String getLocalIp() {
@@ -225,5 +226,13 @@ public class OCMessage {
 
 	public void setArtifacts(Map<String, List<OCArtifact>> artifacts) {
 		this.artifacts = artifacts;
+	}
+
+	public String getCommand() {
+		return command;
+	}
+
+	public void setCommand(String command) {
+		this.command = command;
 	}
 }

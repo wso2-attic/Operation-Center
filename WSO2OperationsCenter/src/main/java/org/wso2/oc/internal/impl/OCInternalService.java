@@ -61,7 +61,7 @@ public class OCInternalService implements OCInternal {
 	 * @param ocAgentMessage
 	 * @return cluster
 	 */
-	private Cluster initializeCluster(OCAgentMessage ocAgentMessage) {
+	public static Cluster initializeCluster(OCAgentMessage ocAgentMessage) {
 		Cluster tempCluster = DataHolder.getClusters().get(ocAgentMessage.getDomain());
 		if (tempCluster == null) {
 			Cluster cluster =
@@ -81,7 +81,7 @@ public class OCInternalService implements OCInternal {
 	 * @return node
 	 * @throws Exception
 	 */
-	private Node initializeNode(OCAgentMessage ocAgentMessage) throws Exception {
+	public static Node initializeNode(OCAgentMessage ocAgentMessage) throws Exception {
 		Node node = new Node();
 		node.setNodeId(generateServerId(ocAgentMessage));
 		node.setIp(ocAgentMessage.getIp());
@@ -105,7 +105,7 @@ public class OCInternalService implements OCInternal {
 	 * @return
 	 * @throws Exception
 	 */
-	private String generateServerId(OCAgentMessage ocAgentMessage) throws Exception {
+	public static String generateServerId(OCAgentMessage ocAgentMessage) throws Exception {
 		String nodeId = "";
 		if (ocAgentMessage.getAdminServiceUrl() == null || ocAgentMessage.getServerName() == null ||
 		    ocAgentMessage.getServerVersion() == null) {
@@ -122,6 +122,7 @@ public class OCInternalService implements OCInternal {
 							"[.]", "_") +
 					serverIpPort[1].replaceAll("[.]", "_");
 		}
+		nodeId = nodeId.replaceAll("\\s+","");
 		return nodeId;
 	}
 
@@ -133,7 +134,7 @@ public class OCInternalService implements OCInternal {
 	 * @return
 	 * @throws Exception
 	 */
-	private List<String> updateCluster(String nodeId, OCAgentMessage ocAgentMessage)
+	public static List<String> updateCluster(String nodeId, OCAgentMessage ocAgentMessage)
 			throws Exception {
 		Cluster cluster = DataHolder.getClusters().get(ocAgentMessage.getDomain());
 		Node node = cluster.getNodes().get(nodeId);
@@ -161,7 +162,7 @@ public class OCInternalService implements OCInternal {
 	 * @throws Exception if the server sends registration message without sending synchronization
 	 *                   message
 	 */
-	private Node updateNode(Node node, OCAgentMessage ocAgentMessage) throws Exception {
+	private static Node updateNode(Node node, OCAgentMessage ocAgentMessage) throws Exception {
 		if (!node.isRegistrationReceived()) {
 			throw new WebApplicationException("Registration Message has not received yet",
 			                                  Response.Status.BAD_REQUEST);
@@ -188,7 +189,7 @@ public class OCInternalService implements OCInternal {
 	 * @param nodeId
 	 * @param cluster
 	 */
-	private synchronized void setClusterCommand(String nodeId, Cluster cluster) {
+	private static synchronized void setClusterCommand(String nodeId, Cluster cluster) {
 		if (!cluster.getCommands().isEmpty()) {
 			//if there is any command available for the cluster update all nodes in cluster
 			cluster.updateClusterStatus();
@@ -234,7 +235,7 @@ public class OCInternalService implements OCInternal {
 	 * @param cluster
 	 * @param clusterCommand
 	 */
-	private synchronized void initializeNodeList(Cluster cluster, ClusterCommand clusterCommand) {
+	private static synchronized void initializeNodeList(Cluster cluster, ClusterCommand clusterCommand) {
 		Map<String, Node> nodeList = cluster.getNodes();
 		for (Node temp : nodeList.values()) {
 			if (temp.getStatus().equals(ServerConstants.NODE_RUNNING)) {
@@ -262,7 +263,7 @@ public class OCInternalService implements OCInternal {
 	 * @param clusterCommand
 	 * @param nodeId
 	 */
-	private synchronized void setCommandOnNodes(Cluster cluster, ClusterCommand clusterCommand,
+	private static synchronized void setCommandOnNodes(Cluster cluster, ClusterCommand clusterCommand,
 	                                            String nodeId) {
 		Iterator<Map.Entry<String, Boolean>> iterator;
 		Node currentNode = cluster.getNodes().get(nodeId);

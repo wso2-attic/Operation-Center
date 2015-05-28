@@ -16,12 +16,20 @@
 
 package org.wso2.oc.external.impl;
 
+import com.google.gson.Gson;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
+import org.wso2.carbon.oc.pubsub.controller.beans.OCCommand;
+import org.wso2.carbon.oc.pubsub.controller.beans.OCMessage;
+import org.wso2.carbon.oc.pubsub.controller.beans.OCMessageHolder;
+import org.wso2.carbon.oc.pubsub.controller.beans.OCMessageProvider;
 import org.wso2.oc.DataHolder;
 import org.wso2.oc.beans.Cluster;
 import org.wso2.oc.beans.Node;
+import org.wso2.oc.beans.OCAgentMessage;
 import org.wso2.oc.external.OCExternal;
+import org.wso2.oc.internal.impl.OCInternalService;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -30,10 +38,41 @@ import java.util.Map;
 public class OCExternalService implements OCExternal {
 
 	private static final Log log = LogFactory.getLog(OCExternalService.class);
+	private Gson gson = new Gson();
+
+	//test method
+	private void init() {
+		StringBuilder sb = new StringBuilder();
+		OCMessage ocMessage =
+				((OCMessageHolder) PrivilegedCarbonContext.getThreadLocalCarbonContext()
+				                                          .getOSGiService(OCMessageProvider.class))
+						.getOCMessage();
+
+		OCAgentMessage ocAgentMessage = new OCAgentMessage(ocMessage);
+
+		Cluster cluster = OCInternalService.initializeCluster(ocAgentMessage);
+
+		try {
+			Node node = OCInternalService.initializeNode(ocAgentMessage);
+			DataHolder.addNode(cluster.getClusterId(), node);
+			OCInternalService.updateCluster(node.getNodeId(), ocAgentMessage);
+		} catch (Exception e) {
+			log.info(e.getMessage(), e);
+		}
+
+		// test set data
+		//OCMessage ocMsg = ((OCMessageHolder)PrivilegedCarbonContext.getThreadLocalCarbonContext().getOSGiService(OCMessageProvider.class)).getOCCommand();
+
+		//ocMsg.setCommand("RESTART");
+		//ocMsg.setAdminServiceUrl(ocMessage.getAdminServiceUrl());
+		ocMessage.setCommand("RESTART");
+
+	}
 
 	public Map<String, Cluster> getAllClustersData() {
 
-		log.debug("Requesting all clusters beans.");
+		//		log.info("Requesting all clusters beans.");
+		init();
 
 		Map<String, Cluster> clusters = DataHolder.getClusters();
 
@@ -47,6 +86,7 @@ public class OCExternalService implements OCExternal {
 	public Cluster getClusterData(String clusterId) {
 
 		log.debug("Requesting the beans in cluster: " + clusterId);
+		init();
 
 		Map<String, Cluster> clusters = DataHolder.getClusters();
 
@@ -65,6 +105,7 @@ public class OCExternalService implements OCExternal {
 	public Map<String, Node> getAllClusterNodesData(String clusterId) {
 
 		log.debug("Requesting all nodes beans in cluster: " + clusterId);
+		init();
 
 		Map<String, Cluster> clusters = DataHolder.getClusters();
 
@@ -85,6 +126,7 @@ public class OCExternalService implements OCExternal {
 	public Node getClusterNodeData(String clusterId, String nodeId) {
 
 		log.debug("Requesting the beans of the node: " + nodeId + " in the cluster: " + clusterId);
+		init();
 
 		Map<String, Cluster> clusters = DataHolder.getClusters();
 
@@ -146,7 +188,17 @@ public class OCExternalService implements OCExternal {
 		}
 
 		nodes.get(nodeId).addCommand(commandId);
-
+		//		OCCommand ocCommand = ((OCMessageHolder)PrivilegedCarbonContext.getThreadLocalCarbonContext().getOSGiService(OCMessageProvider.class)).getOCCommand();
+		//		if(ocCommand == null) {
+		//			ocCommand = new OCCommand(commandId, nodes.get(nodeId).getAdminServiceUrl());
+		//		}
+		//		ocCommand = new OCCommand(commandId, nodes.get(nodeId).getAdminServiceUrl());
+//		((OCMessageHolder) PrivilegedCarbonContext.getThreadLocalCarbonContext()
+//		                                          .getOSGiService(OCMessageProvider.class))
+//				.setOCCommand(
+//						new OCCommand(commandId, nodes.get(nodeId).getAdminServiceUrl()));
+		OCCommand ocCommand = new OCCommand("RESTART>>>", "3123");
+		((OCMessageHolder) PrivilegedCarbonContext.getThreadLocalCarbonContext().getOSGiService(OCMessageProvider.class)).setOCCommand(ocCommand);
 		return Response.ok().build();
 	}
 

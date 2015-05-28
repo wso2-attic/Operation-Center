@@ -18,6 +18,7 @@ package org.wso2.oc.beans;
 
 public class Command {
 	private String commandName;
+	private String nodeId;
 
 	public Command(String commandName) {
 		this.commandName = commandName;
@@ -29,5 +30,13 @@ public class Command {
 
 	public void setCommandName(String commandName) {
 		this.commandName = commandName;
+	}
+
+	public String getNodeId() {
+		return nodeId;
+	}
+
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
 	}
 }

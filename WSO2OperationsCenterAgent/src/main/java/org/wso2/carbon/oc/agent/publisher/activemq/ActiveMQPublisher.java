@@ -43,11 +43,12 @@ public class ActiveMQPublisher  implements OCDataPublisher{
 		Map<String, String> config = ocPublisherConfiguration.getOcPublisherProperties().getPropertyMap();
 		this.interval = Long.parseLong(config.get(ActiveMQConstants.INTERVAL));
 
-		nodeStatusNodeActivatedEventListener = new NodeStatusNodeActivatedEventListener();
+//		nodeStatusNodeActivatedEventListener = new NodeStatusNodeActivatedEventListener();
+//
+//		executorService = Executors.newFixedThreadPool(1);
+//		eventSubscriber = new EventSubscriber("node.Commands", nodeStatusNodeActivatedEventListener);
+//		executorService.execute(eventSubscriber);
 
-		executorService = Executors.newFixedThreadPool(1);
-		eventSubscriber = new EventSubscriber(TOPIC_NAME, nodeStatusNodeActivatedEventListener);
-		executorService.execute(eventSubscriber);
 	}
 
 	@Override

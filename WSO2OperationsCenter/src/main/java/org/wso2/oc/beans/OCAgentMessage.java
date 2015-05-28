@@ -16,6 +16,10 @@
 
 package org.wso2.oc.beans;
 
+import org.wso2.carbon.oc.pubsub.controller.beans.OCMessage;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +47,34 @@ public class OCAgentMessage {
 	private List<Tenant> tenants;
 	private String status;
 	private Map<String, List<OCArtifact>> artifacts;
+
+
+	public OCAgentMessage(){}
+	public OCAgentMessage(OCMessage ocMessage){
+		ip = ocMessage.getLocalIp();
+		serverName = ocMessage.getServerName();
+		serverVersion = ocMessage.getServerName();
+		domain = ocMessage.getDomain();
+		subDomain = ocMessage.getSubDomain();
+		adminServiceUrl = ocMessage.getAdminServiceUrl();
+		startTime = ocMessage.getServerStartTime();
+		os = ocMessage.getOs();
+		totalMemory = ocMessage.getTotalMemory();
+		cpuCount = ocMessage.getCpuCount();
+		cpuSpeed = ocMessage.getCpuSpeed();
+		timestamp = ocMessage.getTimestamp();
+		patches = ocMessage.getPatches();
+		freeMemory = ocMessage.getFreeMemory();
+		idleCpuUsage = ocMessage.getIdleCpuUsage();
+		systemCpuUsage = ocMessage.getSystemCpuUsage();
+		userCpuUsage = ocMessage.getUserCpuUsage();
+		serverUpTime = ocMessage.getServerUpTime();
+		threadCount = ocMessage.getThreadCount();
+		systemLoadAverage = ocMessage.getSystemLoadAverage();
+		tenants = new ArrayList<Tenant>();
+		artifacts = new HashMap<String, List<OCArtifact>>();
+	}
+
 
 	public String getIp() {
 		return ip;

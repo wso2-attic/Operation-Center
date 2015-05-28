@@ -27,7 +27,12 @@ import java.util.Map;
 @Path("external/oc/clusters/")
 public interface OCExternal {
 
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String testThis() throws Exception;
+
 	@GET
+//	@Path("/start/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Map<String, Cluster> getAllClustersData();
 
