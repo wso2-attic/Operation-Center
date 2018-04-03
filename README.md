@@ -1,3 +1,8 @@
+# This repository is no longer maintained.
+
+Issue reports and pull requests will not be attended.
+
+
 OC - Operations Center 
 
 Operations Center functionality that is common across all clusters.
